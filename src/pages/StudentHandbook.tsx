@@ -8,6 +8,7 @@ import ChapterMarineBoiler from '@/components/chapters/ChapterMarineBoiler';
 import ChapterShaftingInstallations from '@/components/chapters/ChapterShaftingInstallations';
 import ChapterOtherAuxiliaries from '@/components/chapters/ChapterOtherAuxiliaries';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import Watermark from '@/components/Watermark';
 
 type ChapterId = 'marine-engines' | 'marine-boiler' | 'shafting-installations' | 'other-auxiliaries';
 
@@ -62,6 +63,7 @@ const StudentHandbook = () => {
 
       {/* Main Content */}
       <main className="flex-1 p-6 md:p-8 overflow-y-auto relative">
+        <Watermark />
         <div className="absolute top-6 right-8 z-50 hide-on-print">
             <ThemeToggle />
         </div>

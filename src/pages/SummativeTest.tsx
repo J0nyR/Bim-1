@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { summativeQuestions, Question } from '@/data/summativeQuestions';
 import { Home } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import Watermark from '@/components/Watermark';
 
 const SummativeTest = () => {
   const [answers, setAnswers] = useState<{ [key: number]: string }>({});
@@ -38,6 +39,7 @@ const SummativeTest = () => {
 
   return (
     <div className="relative">
+        <Watermark />
         <div className="absolute top-6 right-6 z-50 hide-on-print">
             <ThemeToggle />
         </div>

@@ -5,12 +5,14 @@ import { Button } from '@/components/ui/button';
 import { summativeQuestions } from '@/data/summativeQuestions';
 import { Home } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import Watermark from '@/components/Watermark';
 
 const SummativeTestAnswerKey = () => {
   const topics = ['Marine Engines', 'Marine Boiler', 'Shafting & Propeller', 'Other Auxiliaries'];
 
   return (
     <div className="relative">
+        <Watermark />
         <div className="absolute top-6 right-6 z-50 hide-on-print">
             <ThemeToggle />
         </div>

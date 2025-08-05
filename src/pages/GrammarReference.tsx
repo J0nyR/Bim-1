@@ -10,10 +10,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Watermark from '@/components/Watermark';
 
 const GrammarReference = () => {
   return (
     <div className="relative">
+        <Watermark />
         <div className="absolute top-6 right-6 z-50 hide-on-print">
             <ThemeToggle />
         </div>

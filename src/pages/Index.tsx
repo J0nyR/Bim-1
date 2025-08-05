@@ -1,15 +1,17 @@
 {/* This comment is added to trigger a new sync to GitHub. */}
-import { MadeWithDyad } from "@/components/made-with-dyad";
+import { CreatorCredit } from "@/components/CreatorCredit";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { teachingModules } from "@/data/modules";
 import { Book, ClipboardCheck, Ship, BookOpen, BookText } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import Watermark from "@/components/Watermark";
 
 const Index = () => {
   return (
     <div className="relative min-h-screen w-full">
+      <Watermark />
       <div className="absolute top-4 right-4 z-30 hide-on-print">
         <ThemeToggle />
       </div>
@@ -124,7 +126,7 @@ const Index = () => {
         </div>
 
         <div className="absolute bottom-0 hide-on-print">
-          <MadeWithDyad />
+          <CreatorCredit />
         </div>
       </div>
     </div>
