@@ -31,60 +31,65 @@ import SummativeTest from "./pages/SummativeTest";
 import SummativeTestAnswerKey from "./pages/SummativeTestAnswerKey";
 import StudentHandbook from "./pages/StudentHandbook";
 import GrammarReference from "./pages/GrammarReference";
+import Login from "./pages/Login";
+import { SessionContextProvider } from "./context/SessionContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          
-          {/* Course Overview Routes */}
-          <Route path="/syllabus" element={<Syllabus />} />
-          <Route path="/summative-test" element={<SummativeTest />} />
-          <Route path="/summative-test-answer-key" element={<SummativeTestAnswerKey />} />
-          <Route path="/student-handbook" element={<StudentHandbook />} />
-          <Route path="/grammar-reference" element={<GrammarReference />} />
+  <SessionContextProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/login" element={<Login />} />
+            
+            {/* Course Overview Routes */}
+            <Route path="/syllabus" element={<Syllabus />} />
+            <Route path="/summative-test" element={<SummativeTest />} />
+            <Route path="/summative-test-answer-key" element={<SummativeTestAnswerKey />} />
+            <Route path="/student-handbook" element={<StudentHandbook />} />
+            <Route path="/grammar-reference" element={<GrammarReference />} />
 
-          <Route element={<Layout />}>
-            {/* Marine Engines Module Routes */}
-            <Route path="/lesson-plan-marine-engines" element={<LessonPlanMarineEngines />} />
-            <Route path="/teaching-material-marine-engines" element={<TeachingMaterialMarineEngines />} />
-            <Route path="/worksheet-marine-engines" element={<WorksheetMarineEngines />} />
-            <Route path="/answer-key-marine-engines" element={<AnswerKeyMarineEngines />} />
-            <Route path="/rubric-marine-engines" element={<RubricMarineEngines />} />
+            <Route element={<Layout />}>
+              {/* Marine Engines Module Routes */}
+              <Route path="/lesson-plan-marine-engines" element={<LessonPlanMarineEngines />} />
+              <Route path="/teaching-material-marine-engines" element={<TeachingMaterialMarineEngines />} />
+              <Route path="/worksheet-marine-engines" element={<WorksheetMarineEngines />} />
+              <Route path="/answer-key-marine-engines" element={<AnswerKeyMarineEngines />} />
+              <Route path="/rubric-marine-engines" element={<RubricMarineEngines />} />
 
-            {/* Marine Boiler Module Routes */}
-            <Route path="/lesson-plan-marine-boiler" element={<LessonPlanMarineBoiler />} />
-            <Route path="/teaching-material-marine-boiler" element={<TeachingMaterialMarineBoiler />} />
-            <Route path="/worksheet-marine-boiler" element={<WorksheetMarineBoiler />} />
-            <Route path="/answer-key-marine-boiler" element={<AnswerKeyMarineBoiler />} />
-            <Route path="/rubric-marine-boiler" element={<RubricMarineBoiler />} />
+              {/* Marine Boiler Module Routes */}
+              <Route path="/lesson-plan-marine-boiler" element={<LessonPlanMarineBoiler />} />
+              <Route path="/teaching-material-marine-boiler" element={<TeachingMaterialMarineBoiler />} />
+              <Route path="/worksheet-marine-boiler" element={<WorksheetMarineBoiler />} />
+              <Route path="/answer-key-marine-boiler" element={<AnswerKeyMarineBoiler />} />
+              <Route path="/rubric-marine-boiler" element={<RubricMarineBoiler />} />
 
-            {/* Shafting Installations Module Routes */}
-            <Route path="/lesson-plan-shafting-installations" element={<LessonPlanShaftingInstallations />} />
-            <Route path="/teaching-material-shafting-installations" element={<TeachingMaterialShaftingInstallations />} />
-            <Route path="/worksheet-shafting-installations" element={<WorksheetShaftingInstallations />} />
-            <Route path="/answer-key-shafting-installations" element={<AnswerKeyShaftingInstallations />} />
-            <Route path="/rubric-shafting-installations" element={<RubricShaftingInstallations />} />
+              {/* Shafting Installations Module Routes */}
+              <Route path="/lesson-plan-shafting-installations" element={<LessonPlanShaftingInstallations />} />
+              <Route path="/teaching-material-shafting-installations" element={<TeachingMaterialShaftingInstallations />} />
+              <Route path="/worksheet-shafting-installations" element={<WorksheetShaftingInstallations />} />
+              <Route path="/answer-key-shafting-installations" element={<AnswerKeyShaftingInstallations />} />
+              <Route path="/rubric-shafting-installations" element={<RubricShaftingInstallations />} />
 
-            {/* Other Auxiliaries Module Routes */}
-            <Route path="/lesson-plan-other-auxiliaries" element={<LessonPlanOtherAuxiliaries />} />
-            <Route path="/teaching-material-other-auxiliaries" element={<TeachingMaterialOtherAuxiliaries />} />
-            <Route path="/worksheet-other-auxiliaries" element={<WorksheetOtherAuxiliaries />} />
-            <Route path="/answer-key-other-auxiliaries" element={<AnswerKeyOtherAuxiliaries />} />
-            <Route path="/rubric-other-auxiliaries" element={<RubricOtherAuxiliaries />} />
-          </Route>
+              {/* Other Auxiliaries Module Routes */}
+              <Route path="/lesson-plan-other-auxiliaries" element={<LessonPlanOtherAuxiliaries />} />
+              <Route path="/teaching-material-other-auxiliaries" element={<TeachingMaterialOtherAuxiliaries />} />
+              <Route path="/worksheet-other-auxiliaries" element={<WorksheetOtherAuxiliaries />} />
+              <Route path="/answer-key-other-auxiliaries" element={<AnswerKeyOtherAuxiliaries />} />
+              <Route path="/rubric-other-auxiliaries" element={<RubricOtherAuxiliaries />} />
+            </Route>
 
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </SessionContextProvider>
 );
 
 export default App;
