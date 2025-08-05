@@ -26,10 +26,13 @@ const Index = () => {
           <div className="flex justify-center items-center mb-4">
             <Ship className="h-16 w-16 text-primary" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-foreground">
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-2 text-foreground">
             Perangkat Ajar Bahasa Inggris Maritim Teknika 1
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground">
+          <p className="text-2xl md:text-3xl font-semibold text-foreground/90 mb-4">
+            SMKN 9 Pontianak
+          </p>
+          <p className="text-lg md:text-xl text-muted-foreground">
             Teknika Kapal Niaga - Tingkat Operasional
           </p>
         </div>
