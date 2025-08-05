@@ -24,22 +24,37 @@ export const SessionContextProvider = ({ children }: { children: React.ReactNode
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const getSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setSession(session);
-      setUser(session?.user ?? null);
-      if (session?.user) {
-        const { data: profileData } = await supabase
-          .from('profiles')
-          .select('first_name, last_name, role')
-          .eq('id', session.user.id)
-          .single();
-        setProfile(profileData);
+    const fetchSessionAndProfile = async () => {
+      try {
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+        if (sessionError) throw sessionError;
+
+        setSession(session);
+        setUser(session?.user ?? null);
+
+        if (session?.user) {
+          const { data: profileData, error: profileError } = await supabase
+            .from('profiles')
+            .select('first_name, last_name, role')
+            .eq('id', session.user.id)
+            .single();
+
+          if (profileError && profileError.code !== 'PGRST116') { // PGRST116 means "exact one row not found", which is okay here.
+            throw profileError;
+          }
+          setProfile(profileData);
+        } else {
+          setProfile(null);
+        }
+      } catch (error) {
+        console.error("Error fetching session or profile:", error);
+        setProfile(null);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
-    getSession();
+    fetchSessionAndProfile();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (_event, session) => {
