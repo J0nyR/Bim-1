@@ -1,17 +1,15 @@
 {/* This comment is added to trigger a new sync to GitHub. */}
-import { CreatorCredit } from "@/components/CreatorCredit";
+import AppFooter from "@/components/AppFooter";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { teachingModules } from "@/data/modules";
 import { Book, ClipboardCheck, Ship, BookOpen, BookText } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import Watermark from "@/components/Watermark";
 
 const Index = () => {
   return (
-    <div className="relative min-h-screen w-full">
-      <Watermark />
+    <div className="relative flex flex-col min-h-screen w-full">
       <div className="absolute top-4 right-4 z-30 hide-on-print">
         <ThemeToggle />
       </div>
@@ -23,7 +21,7 @@ const Index = () => {
       {/* Overlay */}
       <div className="absolute inset-0 z-10 bg-background/80" />
 
-      <div className="relative z-20 flex flex-col items-center justify-center min-h-screen p-4">
+      <div className="relative z-20 flex flex-col items-center justify-center flex-1 p-4">
         <div className="text-center mb-10">
           <div className="flex justify-center items-center mb-4">
             <Ship className="h-16 w-16 text-primary" />
@@ -124,11 +122,8 @@ const Index = () => {
             </CardContent>
           </Card>
         </div>
-
-        <div className="absolute bottom-0 hide-on-print">
-          <CreatorCredit />
-        </div>
       </div>
+      <AppFooter />
     </div>
   );
 };

@@ -10,16 +10,15 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import Watermark from '@/components/Watermark';
+import AppFooter from '@/components/AppFooter';
 
 const GrammarReference = () => {
   return (
-    <div className="relative">
-        <Watermark />
+    <div className="relative flex flex-col min-h-screen">
         <div className="absolute top-6 right-6 z-50 hide-on-print">
             <ThemeToggle />
         </div>
-        <div className="container mx-auto p-6 space-y-8">
+        <div className="flex-1 container mx-auto p-6 space-y-8">
             <div className="flex justify-between items-center mb-8 flex-wrap gap-4">
                 <h1 className="text-4xl font-bold text-primary flex items-center">
                     <BookText className="mr-4 h-10 w-10" />
@@ -170,6 +169,7 @@ const GrammarReference = () => {
 
             </Accordion>
         </div>
+        <AppFooter />
     </div>
   );
 };
