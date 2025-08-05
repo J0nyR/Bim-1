@@ -1,3 +1,4 @@
+{/* This comment is added to trigger a new sync to GitHub. */}
 import { MadeWithDyad } from "@/components/made-with-dyad";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
