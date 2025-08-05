@@ -33,6 +33,8 @@ import StudentHandbook from "./pages/StudentHandbook";
 import GrammarReference from "./pages/GrammarReference";
 import Login from "./pages/Login";
 import { SessionContextProvider } from "./context/SessionContext";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminRoute from "./components/AdminRoute";
 
 const queryClient = new QueryClient();
 
@@ -53,6 +55,9 @@ const App = () => (
             <Route path="/summative-test-answer-key" element={<SummativeTestAnswerKey />} />
             <Route path="/student-handbook" element={<StudentHandbook />} />
             <Route path="/grammar-reference" element={<GrammarReference />} />
+
+            {/* Protected Admin Route */}
+            <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
 
             <Route element={<Layout />}>
               {/* Marine Engines Module Routes */}

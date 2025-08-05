@@ -4,10 +4,13 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { teachingModules } from "@/data/modules";
-import { Book, ClipboardCheck, Ship, BookOpen, BookText } from "lucide-react";
+import { Book, ClipboardCheck, Ship, BookOpen, BookText, Users } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { useSession } from "@/context/SessionContext";
 
 const Index = () => {
+  const { profile } = useSession();
+
   return (
     <div className="relative flex flex-col min-h-screen w-full">
       <div className="absolute top-4 right-4 z-30 hide-on-print">
@@ -124,6 +127,23 @@ const Index = () => {
               </Button>
             </CardContent>
           </Card>
+
+          {/* Admin Dashboard Card - Conditional */}
+          {profile?.role === 'admin' && (
+            <Card className="md:col-span-2 bg-primary/20 backdrop-blur-sm border-primary/80 transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl">
+              <CardHeader className="text-center pb-4">
+                <CardTitle className="text-xl font-semibold">Panel Admin</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Button asChild className="w-full py-3 text-base h-auto" variant="secondary">
+                  <Link to="/admin">
+                    <Users className="mr-2 h-5 w-5" />
+                    Buka Dashboard Admin
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </div>
       <AppFooter />

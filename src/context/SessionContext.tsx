@@ -5,6 +5,7 @@ import { Session, User } from '@supabase/supabase-js';
 interface Profile {
   first_name: string;
   last_name: string;
+  role: string;
 }
 
 interface SessionContextValue {
@@ -30,7 +31,7 @@ export const SessionContextProvider = ({ children }: { children: React.ReactNode
       if (session?.user) {
         const { data: profileData } = await supabase
           .from('profiles')
-          .select('first_name, last_name')
+          .select('first_name, last_name, role')
           .eq('id', session.user.id)
           .single();
         setProfile(profileData);
@@ -47,7 +48,7 @@ export const SessionContextProvider = ({ children }: { children: React.ReactNode
         if (session?.user) {
           const { data: profileData } = await supabase
             .from('profiles')
-            .select('first_name, last_name')
+            .select('first_name, last_name, role')
             .eq('id', session.user.id)
             .single();
           setProfile(profileData);
