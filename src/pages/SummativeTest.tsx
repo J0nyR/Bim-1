@@ -1,17 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { summativeQuestions, Question } from '@/data/summativeQuestions';
-import { Home } from 'lucide-react';
+import { Home, Loader2 } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import AppFooter from '@/components/AppFooter';
+import { supabase } from '@/integrations/supabase/client';
+
+// Definisikan tipe data untuk soal
+export interface Question {
+  id: number;
+  question: string;
+  question_en: string;
+  options: {
+    [key: string]: {
+      text: string;
+      text_en: string;
+    };
+  };
+  answer: string;
+  topic: string;
+}
 
 const SummativeTest = () => {
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [answers, setAnswers] = useState<{ [key: number]: string }>({});
   const [showAnswers, setShowAnswers] = useState(false);
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('summative_questions')
+          .select('*')
+          .order('id', { ascending: true });
+
+        if (error) {
+          throw error;
+        }
+        setQuestions(data);
+      } catch (err: any) {
+        setError('Gagal memuat soal. Silakan coba lagi nanti.');
+        console.error("Error fetching questions:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchQuestions();
+  }, []);
 
   const handleAnswerChange = (questionId: number, value: string) => {
     setAnswers(prev => ({ ...prev, [questionId]: value }));
@@ -25,9 +66,9 @@ const SummativeTest = () => {
   
   const calculateScore = () => {
     if (!showAnswers) return null;
-    const correctAnswers = summativeQuestions.filter(q => answers[q.id] === q.answer).length;
-    const totalQuestions = summativeQuestions.length;
-    const score = (correctAnswers / totalQuestions) * 100;
+    const correctAnswers = questions.filter(q => answers[q.id] === q.answer).length;
+    const totalQuestions = questions.length;
+    const score = totalQuestions > 0 ? (correctAnswers / totalQuestions) * 100 : 0;
     return {
       correct: correctAnswers,
       total: totalQuestions,
@@ -36,6 +77,30 @@ const SummativeTest = () => {
   };
 
   const score = calculateScore();
+
+  if (loading) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <Loader2 className="h-12 w-12 animate-spin text-primary" />
+        <p className="mt-4 text-muted-foreground">Memuat soal ujian...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen text-center">
+        <h2 className="text-2xl font-semibold text-destructive mb-4">Terjadi Kesalahan</h2>
+        <p className="text-muted-foreground mb-6">{error}</p>
+        <Button asChild>
+          <Link to="/">
+            <Home className="mr-2 h-4 w-4" />
+            Kembali ke Home
+          </Link>
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <div className="relative flex flex-col min-h-screen">
@@ -72,7 +137,7 @@ const SummativeTest = () => {
             )}
 
             <div className="space-y-6">
-                {summativeQuestions.map((q, index) => (
+                {questions.map((q, index) => (
                 <Card key={q.id} className={`bg-card text-card-foreground shadow-lg transition-all border-2 ${getQuestionResultClass(q)}`}>
                     <CardHeader>
                     <CardTitle className="text-xl font-semibold">
@@ -108,7 +173,7 @@ const SummativeTest = () => {
             </div>
 
             <div className="text-center mt-8 space-x-4">
-                <Button onClick={() => setShowAnswers(!showAnswers)} size="lg">
+                <Button onClick={() => setShowAnswers(!showAnswers)} size="lg" disabled={questions.length === 0}>
                 {showAnswers ? "Sembunyikan Jawaban" : "Koreksi & Lihat Jawaban"}
                 </Button>
                 <Button asChild variant="secondary" size="lg">
