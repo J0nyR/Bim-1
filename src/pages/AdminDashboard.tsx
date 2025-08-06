@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { useSession } from '@/context/SessionContext';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { Home } from 'lucide-react';
+import { Home, Edit } from 'lucide-react';
+import EditUserForm from '@/components/EditUserForm';
 
 interface Profile {
   id: string;
@@ -17,28 +17,32 @@ interface Profile {
 const AdminDashboard = () => {
   const [profiles, setProfiles] = useState<Profile[]>([]);
   const [loading, setLoading] = useState(true);
-  const { profile } = useSession();
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [selectedProfile, setSelectedProfile] = useState<Profile | null>(null);
+
+  const fetchProfiles = async () => {
+    setLoading(true);
+    const { data, error } = await supabase.from('profiles').select('*');
+
+    if (error) {
+      console.error('Error fetching profiles:', error);
+    } else if (data) {
+      setProfiles(data);
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
-    const fetchProfiles = async () => {
-      if (profile?.role !== 'admin') return;
-
-      setLoading(true);
-      const { data, error } = await supabase.from('profiles').select('*');
-
-      if (error) {
-        console.error('Error fetching profiles:', error);
-      } else if (data) {
-        setProfiles(data);
-      }
-      setLoading(false);
-    };
-
     fetchProfiles();
-  }, [profile]);
+  }, []);
+
+  const handleEditClick = (profile: Profile) => {
+    setSelectedProfile(profile);
+    setIsEditDialogOpen(true);
+  };
 
   if (loading) {
-    return <div className="flex items-center justify-center h-screen">Loading users...</div>;
+    return <div className="flex items-center justify-center h-screen">Memuat pengguna...</div>;
   }
 
   return (
@@ -72,12 +76,14 @@ const AdminDashboard = () => {
                   <TableCell>{p.first_name || 'N/A'}</TableCell>
                   <TableCell>{p.last_name || 'N/A'}</TableCell>
                   <TableCell>
-                    <span className={`px-2 py-1 text-xs font-medium rounded-full ${p.role === 'admin' ? 'bg-primary/20 text-primary-foreground' : 'bg-muted text-muted-foreground'}`}>
+                    <span className={`px-2 py-1 text-xs font-medium rounded-full ${p.role === 'admin' ? 'bg-primary/20 text-primary' : 'bg-muted text-muted-foreground'}`}>
                       {p.role}
                     </span>
                   </TableCell>
                   <TableCell className="text-right">
-                    {/* Tombol Edit/Hapus akan ditambahkan di sini */}
+                    <Button variant="ghost" size="icon" onClick={() => handleEditClick(p)}>
+                      <Edit className="h-4 w-4" />
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
@@ -85,6 +91,15 @@ const AdminDashboard = () => {
           </Table>
         </CardContent>
       </Card>
+
+      {selectedProfile && (
+        <EditUserForm
+          profile={selectedProfile}
+          isOpen={isEditDialogOpen}
+          onClose={() => setIsEditDialogOpen(false)}
+          onSuccess={fetchProfiles}
+        />
+      )}
     </div>
   );
 };
