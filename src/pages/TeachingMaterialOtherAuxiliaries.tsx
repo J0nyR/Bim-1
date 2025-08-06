@@ -3,13 +3,10 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import FormativeQuiz from '@/components/FormativeQuiz';
-import { formativeQuestions } from '@/data/formativeQuestions';
 import { Button } from '@/components/ui/button';
 import { BookText } from 'lucide-react';
 
 const TeachingMaterialOtherAuxiliaries = () => {
-  const moduleQuestions = formativeQuestions.filter(q => q.topic === 'other-auxiliaries');
-
   return (
     <div className="container mx-auto p-6 space-y-8">
       <h1 className="text-4xl font-bold text-center text-primary mb-8">
@@ -328,7 +325,7 @@ const TeachingMaterialOtherAuxiliaries = () => {
         </CardContent>
       </Card>
 
-      <FormativeQuiz questions={moduleQuestions} />
+      <FormativeQuiz topic="other-auxiliaries" />
     </div>
   );
 };
