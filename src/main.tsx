@@ -3,8 +3,12 @@ import App from "./App.tsx";
 import "./globals.css";
 import { ThemeProvider } from "./components/ThemeProvider.tsx";
 
-createRoot(document.getElementById("root")!).render(
+const container = document.getElementById("root");
+if (container) {
+  const root = createRoot(container);
+  root.render(
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme" attribute="class">
-        <App />
+      <App />
     </ThemeProvider>
-);
+  );
+}
