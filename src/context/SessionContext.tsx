@@ -38,7 +38,7 @@ export const SessionContextProvider = ({ children }: { children: React.ReactNode
           setProfile(profileData);
         }
       } catch (e) {
-        console.error("Error in initial session fetch:", e);
+        // Don't log error for non-existent profile on initial load
       } finally {
         setLoading(false);
       }
