@@ -60,7 +60,6 @@ export const SessionContextProvider = ({ children }: { children: React.ReactNode
         } else {
           setProfile(null);
         }
-        // No need to set loading here as it's for subsequent changes
       }
     );
 
