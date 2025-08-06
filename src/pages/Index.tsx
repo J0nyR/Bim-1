@@ -1,26 +1,12 @@
 import AppFooter from "@/components/AppFooter";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { teachingModules } from "@/data/modules";
-import { Book, ClipboardCheck, Ship, BookOpen, BookText, Users, LogOut } from "lucide-react";
+import { Book, ClipboardCheck, Ship, BookOpen, BookText } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { useSession } from "@/context/SessionContext";
-import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
-  const { session, profile } = useSession();
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (!error) {
-      navigate('/login');
-    } else {
-      console.error('Logout Error:', error);
-    }
-  };
-
   return (
     <div className="relative flex flex-col min-h-screen w-full">
       {/* Background Image */}
@@ -32,22 +18,9 @@ const Index = () => {
       <div className="absolute inset-0 z-10 bg-background/80" />
 
       {/* Header */}
-      <header className="relative z-30 w-full flex justify-between items-center p-4 container mx-auto">
-        <div>
-          {session && profile && (
-            <span className="text-foreground font-semibold">
-              Selamat datang, {profile.first_name || 'Taruna'}!
-            </span>
-          )}
-        </div>
+      <header className="relative z-30 w-full flex justify-end items-center p-4 container mx-auto">
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          {session && (
-            <Button variant="outline" size="sm" onClick={handleLogout}>
-              <LogOut className="mr-2 h-4 w-4" />
-              Logout
-            </Button>
-          )}
         </div>
       </header>
 
@@ -154,23 +127,6 @@ const Index = () => {
               </Button>
             </CardContent>
           </Card>
-
-          {/* Admin Dashboard Card - Conditional */}
-          {profile?.role === 'admin' && (
-            <Card className="md:col-span-2 bg-primary/20 backdrop-blur-sm border-primary/80 transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl">
-              <CardHeader className="text-center pb-4">
-                <CardTitle className="text-xl font-semibold">Panel Admin</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Button asChild className="w-full py-3 text-base h-auto" variant="secondary">
-                  <Link to="/admin">
-                    <Users className="mr-2 h-5 w-5" />
-                    Buka Dashboard Admin
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
-          )}
         </div>
       </div>
       <AppFooter />

@@ -1,21 +1,10 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Home, BookOpen, ClipboardList, Key, FileText, GanttChartSquare, LogOut } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
+import { Home, BookOpen, ClipboardList, Key, FileText, GanttChartSquare } from "lucide-react";
 
 const Sidebar = () => {
   const location = useLocation();
   const { pathname } = location;
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (!error) {
-      navigate('/login');
-    } else {
-      console.error('Logout Error:', error);
-    }
-  };
 
   const isMarineEngineModule = pathname.includes("-marine-engines");
   const isMarineBoilerModule = pathname.includes("-marine-boiler");
@@ -89,10 +78,6 @@ const Sidebar = () => {
               <Home className="mr-2 h-4 w-4" />
               Back to Home
             </Link>
-          </Button>
-          <Button onClick={handleLogout} variant="ghost" className="justify-start w-full">
-            <LogOut className="mr-2 h-4 w-4" />
-            Logout
           </Button>
         </div>
       </div>
