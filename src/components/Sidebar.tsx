@@ -1,10 +1,17 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Home, BookOpen, ClipboardList, Key, FileText, GanttChartSquare } from "lucide-react";
+import { Home, BookOpen, ClipboardList, Key, FileText, GanttChartSquare, LogOut } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 const Sidebar = () => {
   const location = useLocation();
   const { pathname } = location;
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate('/login');
+  };
 
   const isMarineEngineModule = pathname.includes("-marine-engines");
   const isMarineBoilerModule = pathname.includes("-marine-boiler");
@@ -54,7 +61,7 @@ const Sidebar = () => {
 
   return (
     <aside className="hidden md:flex md:flex-col w-64 flex-shrink-0 border-r bg-card p-4">
-      <div className="flex flex-col space-y-4">
+      <div className="flex flex-col space-y-4 h-full">
         <h2 className="text-lg font-semibold tracking-tight px-4">{moduleTitle}</h2>
         <nav className="flex flex-col space-y-1">
           {navItems.map((item) => (
@@ -71,13 +78,19 @@ const Sidebar = () => {
             </Button>
           ))}
         </nav>
-        <hr />
-        <Button asChild variant="outline" className="justify-start">
-          <Link to="/">
-            <Home className="mr-2 h-4 w-4" />
-            Back to Home
-          </Link>
-        </Button>
+        <div className="mt-auto">
+          <hr className="my-4" />
+          <Button asChild variant="outline" className="justify-start w-full mb-2">
+            <Link to="/">
+              <Home className="mr-2 h-4 w-4" />
+              Back to Home
+            </Link>
+          </Button>
+          <Button onClick={handleLogout} variant="ghost" className="justify-start w-full">
+            <LogOut className="mr-2 h-4 w-4" />
+            Logout
+          </Button>
+        </div>
       </div>
     </aside>
   );

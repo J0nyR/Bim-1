@@ -1,21 +1,25 @@
 {/* This comment is added to trigger a new sync to GitHub. */}
 import AppFooter from "@/components/AppFooter";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { teachingModules } from "@/data/modules";
-import { Book, ClipboardCheck, Ship, BookOpen, BookText, Users } from "lucide-react";
+import { Book, ClipboardCheck, Ship, BookOpen, BookText, Users, LogOut } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useSession } from "@/context/SessionContext";
+import { supabase } from "@/integrations/supabase/client";
 
 const Index = () => {
-  const { profile } = useSession();
+  const { session, profile } = useSession();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate('/login');
+  };
 
   return (
     <div className="relative flex flex-col min-h-screen w-full">
-      <div className="absolute top-4 right-4 z-30 hide-on-print">
-        <ThemeToggle />
-      </div>
       {/* Background Image */}
       <div
         className="absolute inset-0 z-0 bg-cover bg-center"
@@ -23,6 +27,26 @@ const Index = () => {
       />
       {/* Overlay */}
       <div className="absolute inset-0 z-10 bg-background/80" />
+
+      {/* Header */}
+      <header className="relative z-30 w-full flex justify-between items-center p-4 container mx-auto">
+        <div>
+          {session && profile && (
+            <span className="text-foreground font-semibold">
+              Selamat datang, {profile.first_name || 'Taruna'}!
+            </span>
+          )}
+        </div>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          {session && (
+            <Button variant="outline" size="sm" onClick={handleLogout}>
+              <LogOut className="mr-2 h-4 w-4" />
+              Logout
+            </Button>
+          )}
+        </div>
+      </header>
 
       <div className="relative z-20 flex flex-col items-center justify-center flex-1 p-4">
         <div className="text-center mb-10">
