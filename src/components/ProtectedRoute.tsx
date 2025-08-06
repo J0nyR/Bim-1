@@ -5,7 +5,7 @@ const ProtectedRoute = () => {
   const { session, loading } = useSession();
 
   if (loading) {
-    return <div>Loading session...</div>; // Atau komponen spinner yang lebih baik
+    return <div className="flex items-center justify-center h-screen">Loading session...</div>;
   }
 
   if (!session) {

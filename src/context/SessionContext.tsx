@@ -24,36 +24,43 @@ export const SessionContextProvider = ({ children }: { children: React.ReactNode
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true);
+    const getInitialSession = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        setSession(session);
+        setUser(session?.user ?? null);
+        if (session?.user) {
+          const { data: profileData } = await supabase
+            .from('profiles')
+            .select('first_name, last_name, role')
+            .eq('id', session.user.id)
+            .single();
+          setProfile(profileData);
+        }
+      } catch (e) {
+        console.error("Error in initial session fetch:", e);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    getInitialSession();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (_event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
-
         if (session?.user) {
-          try {
-            const { data: profileData, error: profileError } = await supabase
-              .from('profiles')
-              .select('first_name, last_name, role')
-              .eq('id', session.user.id)
-              .single();
-            
-            if (profileError && profileError.code !== 'PGRST116') {
-                console.error("Profile fetch error:", profileError);
-                setProfile(null);
-            } else {
-                setProfile(profileData);
-            }
-          } catch (e) {
-            console.error("An error occurred while fetching profile:", e);
-            setProfile(null);
-          }
+          const { data: profileData } = await supabase
+            .from('profiles')
+            .select('first_name, last_name, role')
+            .eq('id', session.user.id)
+            .single();
+          setProfile(profileData);
         } else {
           setProfile(null);
         }
-        
-        setLoading(false);
+        // No need to set loading here as it's for subsequent changes
       }
     );
 

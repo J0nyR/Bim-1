@@ -1,4 +1,3 @@
-{/* This comment is added to trigger a new sync to GitHub. */}
 import AppFooter from "@/components/AppFooter";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";

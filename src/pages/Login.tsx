@@ -5,10 +5,14 @@ import { Navigate } from 'react-router-dom';
 import { useSession } from '@/context/SessionContext';
 
 const Login = () => {
-  const { session } = useSession();
+  const { session, loading } = useSession();
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   if (session) {
-    return <Navigate to="/" />;
+    return <Navigate to="/" replace />;
   }
 
   return (
@@ -24,7 +28,6 @@ const Login = () => {
           appearance={{ theme: ThemeSupa }}
           providers={[]}
           theme="dark"
-          redirectTo="/"
         />
       </div>
     </div>
