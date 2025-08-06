@@ -1,4 +1,22 @@
-<svg width="1920" height="1080" xmlns="http://www.w3.org/2000/svg">
-  <rect width="100%" height="100%" fill="#333" />
-  <text x="50%" y="50%" font-family="Arial" font-size="60" fill="#fff" text-anchor="middle" dy=".3em">Placeholder: Engine Room Background</text>
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="1920" height="1080" fill="url(#paint0_radial_2_2)"/>
+<g opacity="0.05" filter="url(#filter0_f_2_2)">
+<path d="M1143.5 219C1143.5 219 1069.15 332.347 901 364C732.851 395.653 622.5 379.5 622.5 379.5L666 587.5C666 587.5 779.351 613.653 901 569.5C1022.65 525.347 1143.5 514 1143.5 514V219Z" fill="#002256"/>
+<path d="M1209 219C1209 219 1283.35 332.347 1451.5 364C1619.65 395.653 1729.5 379.5 1729.5 379.5L1686 587.5C1686 587.5 1572.65 613.653 1451 569.5C1329.35 525.347 1209 514 1209 514V219Z" fill="#002256"/>
+<path d="M1143.5 861C1143.5 861 1069.15 747.653 901 716C732.851 684.347 622.5 700.5 622.5 700.5L666 492.5C666 492.5 779.351 466.347 901 510.5C1022.65 554.653 1143.5 566 1143.5 566V861Z" fill="#002256"/>
+<path d="M1209 861C1209 861 1283.35 747.653 1451.5 716C1619.65 684.347 1729.5 700.5 1729.5 700.5L1686 492.5C1686 492.5 1572.65 466.347 1451 510.5C1329.35 554.653 1209 566 1209 566V861Z" fill="#002256"/>
+<path d="M777.5 219C777.5 219 703.153 332.347 535 364C366.851 395.653 256.5 379.5 256.5 379.5L300 587.5C300 587.5 413.351 613.653 535 569.5C656.653 525.347 777.5 514 777.5 514V219Z" fill="#002256"/>
+<path d="M777.5 861C777.5 861 703.153 747.653 535 716C366.851 684.347 256.5 700.5 256.5 700.5L300 492.5C300 492.5 413.351 466.347 535 510.5C656.653 554.653 777.5 566 777.5 566V861Z" fill="#002256"/>
+</g>
+<defs>
+<filter id="filter0_f_2_2" x="-143.5" y="-181" width="2273" height="1442" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="200" result="effect1_foregroundBlur_2_2"/>
+</filter>
+<radialGradient id="paint0_radial_2_2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(960 540) rotate(90) scale(540 960)">
+<stop stop-color="#00112A"/>
+<stop offset="1" stop-color="#000613"/>
+</radialGradient>
+</defs>
 </svg>

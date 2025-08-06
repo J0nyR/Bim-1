@@ -14,8 +14,12 @@ const Index = () => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    navigate('/login');
+    const { error } = await supabase.auth.signOut();
+    if (!error) {
+      navigate('/login');
+    } else {
+      console.error('Logout Error:', error);
+    }
   };
 
   return (
