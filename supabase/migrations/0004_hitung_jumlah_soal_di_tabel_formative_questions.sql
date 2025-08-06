@@ -1,0 +1,1 @@
+SELECT COUNT(*) FROM public.formative_questions;
