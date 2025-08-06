@@ -24,52 +24,35 @@ export const SessionContextProvider = ({ children }: { children: React.ReactNode
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchSessionAndProfile = async () => {
-      try {
-        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-        if (sessionError) throw sessionError;
-
-        setSession(session);
-        setUser(session?.user ?? null);
-
-        if (session?.user) {
-          const { data: profileData, error: profileError } = await supabase
-            .from('profiles')
-            .select('first_name, last_name, role')
-            .eq('id', session.user.id)
-            .single();
-
-          if (profileError && profileError.code !== 'PGRST116') { // PGRST116 means "exact one row not found", which is okay here.
-            throw profileError;
-          }
-          setProfile(profileData);
-        } else {
-          setProfile(null);
-        }
-      } catch (error) {
-        console.error("Error fetching session or profile:", error);
-        setProfile(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchSessionAndProfile();
+    setLoading(true);
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (_event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
+
         if (session?.user) {
-          const { data: profileData } = await supabase
-            .from('profiles')
-            .select('first_name, last_name, role')
-            .eq('id', session.user.id)
-            .single();
-          setProfile(profileData);
+          try {
+            const { data: profileData, error: profileError } = await supabase
+              .from('profiles')
+              .select('first_name, last_name, role')
+              .eq('id', session.user.id)
+              .single();
+            
+            if (profileError && profileError.code !== 'PGRST116') {
+                console.error("Profile fetch error:", profileError);
+                setProfile(null);
+            } else {
+                setProfile(profileData);
+            }
+          } catch (e) {
+            console.error("An error occurred while fetching profile:", e);
+            setProfile(null);
+          }
         } else {
           setProfile(null);
         }
+        
         setLoading(false);
       }
     );
