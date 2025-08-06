@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import FormativeQuiz from '@/components/FormativeQuiz';
 import { Button } from '@/components/ui/button';
 import { BookText } from 'lucide-react';
+import TeachingContentDisplay from '@/components/TeachingContentDisplay';
 
 const TeachingMaterialShaftingInstallations = () => {
+  const topicId = "shafting-installations";
+
   return (
     <div className="container mx-auto p-6 space-y-8">
       <h1 className="text-4xl font-bold text-center text-primary mb-8">
@@ -15,163 +17,27 @@ const TeachingMaterialShaftingInstallations = () => {
 
       <Card className="bg-card text-card-foreground shadow-lg">
         <CardHeader>
-          <CardTitle className="text-2xl font-semibold">Topik: Shafting Installations and Propeller (Instalasi Poros dan Baling-baling)</CardTitle>
+          <CardTitle className="text-2xl font-semibold">Topik: Shafting Installations and Propeller</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-4">
+        <CardContent>
           <p className="text-lg">
             Materi ini mencakup pengantar sistem poros, glosarium, penjelasan komponen utama, jenis-jenis baling-baling, dan contoh percakapan.
           </p>
-          <p className="text-lg">
-            This material includes an introduction to the shafting system, a glossary, an explanation of main components, propeller types, and a conversation example.
-          </p>
         </CardContent>
       </Card>
 
-      <Card className="bg-card text-card-foreground shadow-lg">
-        <CardHeader>
-          <CardTitle className="text-2xl font-semibold">Glosarium & Kosakata / Glossary & Vocabulary</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-3">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <p><strong>Shafting:</strong> Sistem poros yang mentransmisikan putaran dari mesin ke baling-baling.</p>
-              <p className="text-muted-foreground"><em>The system of shafts that transmits rotation from the engine to the propeller.</em></p>
-            </div>
-            <div>
-              <p><strong>Propeller:</strong> Perangkat dengan daun (blades) yang berputar untuk menghasilkan daya dorong.</p>
-              <p className="text-muted-foreground"><em>A device with blades that rotates to produce thrust.</em></p>
-            </div>
-            <div>
-              <p><strong>Thrust Block:</strong> Bantalan yang menyalurkan daya dorong dari poros ke badan kapal.</p>
-              <p className="text-muted-foreground"><em>A bearing that transfers the thrust from the shaft to the ship's hull.</em></p>
-            </div>
-            <div>
-              <p><strong>Stern Tube:</strong> Tabung yang melingkupi poros baling-baling saat menembus badan kapal.</p>
-              <p className="text-muted-foreground"><em>A tube housing the propeller shaft where it passes through the hull.</em></p>
-            </div>
-            <div>
-              <p><strong>Plummer Block:</strong> Bantalan untuk menopang poros antara (intermediate shaft).</p>
-              <p className="text-muted-foreground"><em>A bearing that supports the intermediate shaft.</em></p>
-            </div>
-            <div>
-              <p><strong>Alignment:</strong> Kelurusan poros untuk mencegah getaran dan keausan berlebih.</p>
-              <p className="text-muted-foreground"><em>The straightness of the shafting to prevent vibration and excessive wear.</em></p>
-            </div>
-            <div>
-              <p><strong>Fixed Pitch Propeller (FPP):</strong> Baling-baling dengan sudut daun yang tidak bisa diubah.</p>
-              <p className="text-muted-foreground"><em>A propeller with a blade angle that cannot be changed.</em></p>
-            </div>
-            <div>
-              <p><strong>Controllable Pitch Propeller (CPP):</strong> Baling-baling yang sudut daunnya bisa diubah saat beroperasi.</p>
-              <p className="text-muted-foreground"><em>A propeller whose blade angle can be changed during operation.</em></p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      <TeachingContentDisplay topicId={topicId} />
 
-      <Card className="bg-card text-card-foreground shadow-lg">
-        <CardHeader>
-          <CardTitle className="text-2xl font-semibold">Penjelasan Konsep / Concept Explanation</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div>
-            <h3 className="text-xl font-medium mb-2">1. Fungsi Sistem Poros / Function of the Shafting System</h3>
-            <p>Sistem poros memiliki dua fungsi utama: 1) Mentransmisikan torsi (gaya putar) dari mesin utama ke baling-baling. 2) Mentransmisikan daya dorong (thrust) yang dihasilkan oleh baling-baling ke struktur kapal untuk mendorongnya maju atau mundur.</p>
-            <p className="text-muted-foreground mb-2"><em>The shafting system has two main functions: 1) To transmit torque (rotational force) from the main engine to the propeller. 2) To transmit the thrust generated by the propeller to the ship's structure to push it forward or backward.</em></p>
-          </div>
-          <Separator />
-          <div>
-            <h3 className="text-xl font-medium mb-2">2. Komponen Utama Instalasi Poros / Main Components of a Shafting Installation</h3>
-            <ul className="list-disc list-inside space-y-2 ml-4">
-              <li><strong>Thrust Shaft & Block:</strong> Poros ini terhubung langsung ke mesin dan memiliki bantalan pendorong (thrust block) yang besar untuk menyerap daya dorong.</li>
-              <li className="text-muted-foreground"><em>This shaft is connected directly to the engine and has a large thrust block to absorb the thrust force.</em></li>
-              <li><strong>Intermediate Shaft(s):</strong> Satu atau lebih poros yang menghubungkan poros pendorong dengan poros ekor. Poros ini ditopang oleh bantalan yang disebut plummer blocks.</li>
-              <li className="text-muted-foreground"><em>One or more shafts that connect the thrust shaft to the tail shaft. These shafts are supported by bearings called plummer blocks.</em></li>
-              <li><strong>Propeller Shaft (Tail Shaft):</strong> Poros terakhir dalam rangkaian, yang melewati tabung buritan (stern tube) dan tempat baling-baling dipasang.</li>
-              <li className="text-muted-foreground"><em>The final shaft in the line, which passes through the stern tube and on which the propeller is mounted.</em></li>
-              <li><strong>Stern Tube:</strong> Sebuah tabung kedap air yang berisi bantalan dan perapat (seals) untuk menopang poros baling-baling dan mencegah air laut masuk ke kamar mesin.</li>
-              <li className="text-muted-foreground"><em>A watertight tube containing bearings and seals to support the propeller shaft and prevent seawater from entering the engine room.</em></li>
-            </ul>
-          </div>
-          <Separator />
-          <div>
-            <h3 className="text-xl font-medium mb-2">3. Jenis-jenis Baling-Baling / Propeller Types</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <h4 className="text-lg font-semibold">A. Fixed Pitch Propeller (FPP)</h4>
-                <p>Sudut (pitch) dari daun baling-balingnya tetap dan tidak bisa diubah. Untuk bergerak mundur, arah putaran mesin harus dibalik. Ini adalah jenis yang paling umum karena sederhana, kuat, dan efisien.</p>
-                <p className="text-muted-foreground mb-2"><em>The angle (pitch) of its blades is fixed and cannot be changed. To move astern, the engine's direction of rotation must be reversed. This is the most common type due to its simplicity, robustness, and efficiency.</em></p>
-              </div>
-              <div>
-                <h4 className="text-lg font-semibold">B. Controllable Pitch Propeller (CPP)</h4>
-                <p>Sudut daun baling-balingnya dapat diubah menggunakan sistem hidrolik, bahkan saat mesin berputar. Ini memungkinkan kontrol kecepatan dan arah (maju/mundur) yang sangat baik tanpa mengubah putaran atau arah mesin. Sangat berguna untuk kapal yang sering bermanuver, seperti feri atau kapal tunda.</p>
-                <p className="text-muted-foreground mb-2"><em>The pitch of the blades can be changed using a hydraulic system, even while the engine is running. This allows for excellent control of speed and direction (ahead/astern) without changing the engine's speed or direction. Very useful for vessels that maneuver frequently, like ferries or tugboats.</em></p>
-              </div>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="text-center">
+        <Button asChild variant="outline" className="w-full md:w-auto">
+          <Link to="/grammar-reference">
+            <BookText className="mr-2 h-4 w-4" />
+            Lihat Referensi Tata Bahasa Lengkap
+          </Link>
+        </Button>
+      </div>
 
-      <Card className="bg-card text-card-foreground shadow-lg">
-        <CardHeader>
-          <CardTitle className="text-2xl font-semibold">Fokus Tata Bahasa / Grammar Focus</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div>
-            <h3 className="text-xl font-medium mb-2">1. Cause and Effect (If..., causes, leads to)</h3>
-            <p className="mb-2">Kita menggunakan struktur ini untuk menjelaskan hubungan sebab-akibat, yang sangat umum dalam bidang teknik. / We use these structures to explain cause-and-effect relationships, which are very common in engineering.</p>
-            <ul className="list-disc list-inside space-y-1 ml-4 bg-muted p-4 rounded-md">
-              <li>"<strong>If</strong> the shaft alignment is poor, it <strong>will cause</strong> excessive vibration."</li>
-              <li>"Poor alignment <strong>causes</strong> premature bearing wear."</li>
-              <li>"A damaged propeller blade <strong>leads to</strong> a loss of efficiency."</li>
-            </ul>
-          </div>
-          <Separator />
-          <div>
-            <h3 className="text-xl font-medium mb-2">2. Comparative Adjectives (more, -er, than)</h3>
-            <p className="mb-2">Kita menggunakan kata sifat komparatif untuk membandingkan dua hal, seperti FPP dan CPP. / We use comparative adjectives to compare two things, such as an FPP and a CPP.</p>
-            <ul className="list-disc list-inside space-y-1 ml-4 bg-muted p-4 rounded-md">
-              <li>"An FPP is <strong>simpler</strong> and <strong>stronger than</strong> a CPP."</li>
-              <li>"A CPP is <strong>more expensive</strong> and <strong>more complex</strong>."</li>
-              <li>"A CPP offers <strong>better</strong> maneuverability." (better is the irregular comparative of good)</li>
-            </ul>
-          </div>
-          <Separator />
-          <div className="text-center">
-            <Button asChild variant="outline" className="w-full md:w-auto">
-              <Link to="/grammar-reference">
-                <BookText className="mr-2 h-4 w-4" />
-                Lihat Referensi Tata Bahasa Lengkap
-              </Link>
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card className="bg-card text-card-foreground shadow-lg">
-        <CardHeader>
-          <CardTitle className="text-2xl font-semibold">Contoh Percakapan / Conversation Example</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <p className="font-semibold">Skenario: Second Engineer dan Oiler sedang melakukan inspeksi di terowongan poros (shaft tunnel).</p>
-          <p className="font-semibold text-muted-foreground"><em>Scenario: The Second Engineer and an Oiler are on an inspection round in the shaft tunnel.</em></p>
-
-          <div className="space-y-2">
-            <p><strong>Second Engineer:</strong> "Alright, let's check the plummer blocks. Feel the bearing housing. Is it running hot?"</p>
-            <p className="text-muted-foreground"><em>"Baik, mari kita periksa plummer block. Rasakan rumah bantalannya. Apakah panas saat beroperasi?"</em></p>
-            <p><strong>Oiler:</strong> "No, sir. The temperature feels normal. The oil level in the sight glass is also good."</p>
-            <p className="text-muted-foreground"><em>"Tidak, Pak. Suhunya terasa normal. Level oli di gelas penduga juga bagus."</em></p>
-            <p><strong>Second Engineer:</strong> "Good. Now, let's move to the stern tube forward seal. Shine your torch on it. Any signs of water leakage?"</p>
-            <p className="text-muted-foreground"><em>"Bagus. Sekarang, kita pindah ke perapat depan tabung buritan. Sorot dengan sentermu. Ada tanda-tanda kebocoran air?"</em></p>
-            <p><strong>Oiler:</strong> "It looks dry, sir. No leakage."</p>
-            <p className="text-muted-foreground"><em>"Kelihatannya kering, Pak. Tidak ada kebocoran."</em></p>
-            <p><strong>Second Engineer:</strong> "Excellent. Proper shaft alignment is critical. If we see high temperatures or leaks, it could be a sign of misalignment, which can cause serious damage. We'll check the aft seal from the deck later."</p>
-            <p className="text-muted-foreground"><em>"Bagus sekali. Kelurusan poros yang baik itu sangat penting. Jika kita melihat suhu tinggi atau kebocoran, itu bisa jadi tanda kelurusan yang buruk, yang dapat menyebabkan kerusakan serius. Nanti kita periksa perapat belakang dari dek."</em></p>
-          </div>
-        </CardContent>
-      </Card>
-
-      <FormativeQuiz topic="shafting-installations" />
+      <FormativeQuiz topic={topicId} />
     </div>
   );
 };

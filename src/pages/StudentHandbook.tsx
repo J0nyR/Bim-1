@@ -3,27 +3,15 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Home, BookOpen } from 'lucide-react';
 import { teachingModules } from '@/data/modules';
-import ChapterMarineEngines from '@/components/chapters/ChapterMarineEngines';
-import ChapterMarineBoiler from '@/components/chapters/ChapterMarineBoiler';
-import ChapterShaftingInstallations from '@/components/chapters/ChapterShaftingInstallations';
-import ChapterOtherAuxiliaries from '@/components/chapters/ChapterOtherAuxiliaries';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import AppFooter from '@/components/AppFooter';
+import TeachingContentDisplay from '@/components/TeachingContentDisplay';
 
 type ChapterId = 'marine-engines' | 'marine-boiler' | 'shafting-installations' | 'other-auxiliaries';
-
-// Map chapter IDs to their corresponding components for cleaner rendering logic
-const chapterComponents: Record<ChapterId, React.ComponentType> = {
-  'marine-engines': ChapterMarineEngines,
-  'marine-boiler': ChapterMarineBoiler,
-  'shafting-installations': ChapterShaftingInstallations,
-  'other-auxiliaries': ChapterOtherAuxiliaries,
-};
 
 const StudentHandbook = () => {
   const [activeChapter, setActiveChapter] = useState<ChapterId>('marine-engines');
 
-  const ActiveChapterComponent = chapterComponents[activeChapter] || ChapterMarineEngines;
   const activeModule = teachingModules.find(m => m.id === activeChapter);
 
   return (
@@ -72,7 +60,7 @@ const StudentHandbook = () => {
               <h1 className="text-4xl font-bold text-primary">{activeModule?.title}</h1>
               <p className="text-xl text-muted-foreground">{activeModule?.englishTitle}</p>
             </div>
-            <ActiveChapterComponent />
+            <TeachingContentDisplay topicId={activeChapter} />
           </div>
         </main>
       </div>
