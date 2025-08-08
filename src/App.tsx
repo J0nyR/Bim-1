@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
+import RootLayout from "./components/RootLayout"; // Impor RootLayout
 import LessonPlanMarineEngines from "./pages/LessonPlanMarineEngines";
 import TeachingMaterialMarineEngines from "./pages/TeachingMaterialMarineEngines";
 import WorksheetMarineEngines from "./pages/WorksheetMarineEngines";
@@ -41,40 +42,44 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/syllabus" element={<Syllabus />} />
-          <Route path="/summative-test" element={<SummativeTest />} />
-          <Route path="/summative-test-answer-key" element={<SummativeTestAnswerKey />} />
-          <Route path="/student-handbook" element={<StudentHandbook />} />
-          <Route path="/grammar-reference" element={<GrammarReference />} />
+          <Route element={<RootLayout />}>
+            {/* Halaman tanpa sidebar */}
+            <Route path="/" element={<Index />} />
+            <Route path="/syllabus" element={<Syllabus />} />
+            <Route path="/summative-test" element={<SummativeTest />} />
+            <Route path="/summative-test-answer-key" element={<SummativeTestAnswerKey />} />
+            <Route path="/student-handbook" element={<StudentHandbook />} />
+            <Route path="/grammar-reference" element={<GrammarReference />} />
 
-          <Route element={<Layout />}>
-            <Route path="/lesson-plan-marine-engines" element={<LessonPlanMarineEngines />} />
-            <Route path="/teaching-material-marine-engines" element={<TeachingMaterialMarineEngines />} />
-            <Route path="/worksheet-marine-engines" element={<WorksheetMarineEngines />} />
-            <Route path="/answer-key-marine-engines" element={<AnswerKeyMarineEngines />} />
-            <Route path="/rubric-marine-engines" element={<RubricMarineEngines />} />
+            {/* Halaman dengan sidebar */}
+            <Route element={<Layout />}>
+              <Route path="/lesson-plan-marine-engines" element={<LessonPlanMarineEngines />} />
+              <Route path="/teaching-material-marine-engines" element={<TeachingMaterialMarineEngines />} />
+              <Route path="/worksheet-marine-engines" element={<WorksheetMarineEngines />} />
+              <Route path="/answer-key-marine-engines" element={<AnswerKeyMarineEngines />} />
+              <Route path="/rubric-marine-engines" element={<RubricMarineEngines />} />
 
-            <Route path="/lesson-plan-marine-boiler" element={<LessonPlanMarineBoiler />} />
-            <Route path="/teaching-material-marine-boiler" element={<TeachingMaterialMarineBoiler />} />
-            <Route path="/worksheet-marine-boiler" element={<WorksheetMarineBoiler />} />
-            <Route path="/answer-key-marine-boiler" element={<AnswerKeyMarineBoiler />} />
-            <Route path="/rubric-marine-boiler" element={<RubricMarineBoiler />} />
+              <Route path="/lesson-plan-marine-boiler" element={<LessonPlanMarineBoiler />} />
+              <Route path="/teaching-material-marine-boiler" element={<TeachingMaterialMarineBoiler />} />
+              <Route path="/worksheet-marine-boiler" element={<WorksheetMarineBoiler />} />
+              <Route path="/answer-key-marine-boiler" element={<AnswerKeyMarineBoiler />} />
+              <Route path="/rubric-marine-boiler" element={<RubricMarineBoiler />} />
 
-            <Route path="/lesson-plan-shafting-installations" element={<LessonPlanShaftingInstallations />} />
-            <Route path="/teaching-material-shafting-installations" element={<TeachingMaterialShaftingInstallations />} />
-            <Route path="/worksheet-shafting-installations" element={<WorksheetShaftingInstallations />} />
-            <Route path="/answer-key-shafting-installations" element={<AnswerKeyShaftingInstallations />} />
-            <Route path="/rubric-shafting-installations" element={<RubricShaftingInstallations />} />
+              <Route path="/lesson-plan-shafting-installations" element={<LessonPlanShaftingInstallations />} />
+              <Route path="/teaching-material-shafting-installations" element={<TeachingMaterialShaftingInstallations />} />
+              <Route path="/worksheet-shafting-installations" element={<WorksheetShaftingInstallations />} />
+              <Route path="/answer-key-shafting-installations" element={<AnswerKeyShaftingInstallations />} />
+              <Route path="/rubric-shafting-installations" element={<RubricShaftingInstallations />} />
 
-            <Route path="/lesson-plan-other-auxiliaries" element={<LessonPlanOtherAuxiliaries />} />
-            <Route path="/teaching-material-other-auxiliaries" element={<TeachingMaterialOtherAuxiliaries />} />
-            <Route path="/worksheet-other-auxiliaries" element={<WorksheetOtherAuxiliaries />} />
-            <Route path="/answer-key-other-auxiliaries" element={<AnswerKeyOtherAuxiliaries />} />
-            <Route path="/rubric-other-auxiliaries" element={<RubricOtherAuxiliaries />} />
+              <Route path="/lesson-plan-other-auxiliaries" element={<LessonPlanOtherAuxiliaries />} />
+              <Route path="/teaching-material-other-auxiliaries" element={<TeachingMaterialOtherAuxiliaries />} />
+              <Route path="/worksheet-other-auxiliaries" element={<WorksheetOtherAuxiliaries />} />
+              <Route path="/answer-key-other-auxiliaries" element={<AnswerKeyOtherAuxiliaries />} />
+              <Route path="/rubric-other-auxiliaries" element={<RubricOtherAuxiliaries />} />
+            </Route>
+
+            <Route path="*" element={<NotFound />} />
           </Route>
-
-          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

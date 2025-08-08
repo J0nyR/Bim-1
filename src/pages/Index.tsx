@@ -1,4 +1,3 @@
-import AppFooter from "@/components/AppFooter";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,7 +7,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Index = () => {
   return (
-    <div className="relative flex flex-col min-h-screen w-full">
+    <div className="relative flex flex-col flex-1 w-full">
       {/* Background Image */}
       <div
         className="absolute inset-0 z-0 bg-cover bg-center"
@@ -129,7 +128,6 @@ const Index = () => {
           </Card>
         </div>
       </div>
-      <AppFooter />
     </div>
   );
 };

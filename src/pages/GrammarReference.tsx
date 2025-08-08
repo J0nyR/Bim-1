@@ -10,11 +10,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import AppFooter from '@/components/AppFooter';
 
 const GrammarReference = () => {
   return (
-    <div className="relative flex flex-col min-h-screen">
+    <div className="relative flex flex-col flex-1">
         <div className="absolute top-6 right-6 z-50 hide-on-print">
             <ThemeToggle />
         </div>
@@ -169,7 +168,6 @@ const GrammarReference = () => {
 
             </Accordion>
         </div>
-        <AppFooter />
     </div>
   );
 };

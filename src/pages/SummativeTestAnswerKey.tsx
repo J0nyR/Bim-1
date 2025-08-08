@@ -4,7 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from '@/components/ui/button';
 import { Home, Loader2 } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import AppFooter from '@/components/AppFooter';
 import { supabase } from '@/integrations/supabase/client';
 import { Question } from './SummativeTest'; // Import the Question type
 
@@ -63,7 +62,7 @@ const SummativeTestAnswerKey = () => {
   }
 
   return (
-    <div className="relative flex flex-col min-h-screen">
+    <div className="relative flex flex-col flex-1">
         <div className="absolute top-6 right-6 z-50 hide-on-print">
             <ThemeToggle />
         </div>
@@ -107,7 +106,6 @@ const SummativeTestAnswerKey = () => {
                 );
             })}
         </div>
-        <AppFooter />
     </div>
   );
 };
