@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">bahasa inggris maritim teknika 1</string>
+    <string name="title_activity_main">bahasa inggris maritim teknika 1</string>
+    <string name="package_name">com.example.bahasainggrismaritimteknika1</string>
+    <string name="custom_url_scheme">com.example.bahasainggrismaritimteknika1</string>
+</resources>
